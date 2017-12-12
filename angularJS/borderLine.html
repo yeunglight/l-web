@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>文字下两条下划线随字变动</title>
+	</head>
+	<style type="text/css">
+		.receiptFormTitle{
+			text-align: center;
+			max-width: 240px;/*给定title的最大宽度*/
+		}
+		.receiptFormTitle input{
+			border: none;
+			text-align: center;
+			display: block;
+			width: 100%;
+			outline: none;
+		}
+		.receiptFormTitle span{
+			min-width: 100px;
+			max-width: 100%;
+			border-bottom: 1px solid #c8c8c8;
+			border-top: 1px solid #C8C8C8;
+			height: 2px;
+			overflow: hidden;
+			display: inline-block;
+		}
+	</style>
+	<body>
+		<div class="wrap" ng-app="App" ng-controller="ctr">
+			<div class="receiptFormTitle">
+				<input type="text" name="" id="" value="" ng-model="param.title" />
+				<span ng-bind="param.title"></span>
+			</div>
+		</div>
+	</body>
+	<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		angular.module("App",[]).controller("ctr", function($scope){
+			$scope.param = {
+				title: "物业服务收款收据"
+			}
+		})
+		
+	</script>
+</html>

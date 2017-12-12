@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var name = "yangyang";
+	    var obj = {
+	        name:"dodod11111",
+	        hello:function () {
+	            var that = this;
+	            return function () {
+	                return this.name;
+	            }
+	        }
+	    }
+	    alert(obj.hello()());
+	    var obj = {
+	        name:"dodod",
+	        hello:function () {
+	            return function () {
+	                return this.name;
+	            }
+	
+	        }
+	    }
+	    alert(obj.hello()());
+	    // 
+	</script>
+</html>

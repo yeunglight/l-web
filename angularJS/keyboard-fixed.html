@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<title>虚拟键盘与fixed属性</title>
+		<style type="text/css">
+			* {
+				margin: 0px;
+				padding: 0px;
+			}
+			.whole{
+				border: 1px solid red;
+				position: relative;
+				height: 17.35rem;
+			}
+			.whole div{
+				border: 2px solid green;
+			}
+			header{
+				height: 5rem;
+			}
+			input{
+				width: 80%;
+				height: 1rem;
+				font-size: 1rem;
+			}
+			.content{
+				height: calc(100% - 5rem);
+			}
+			footer{
+				position: fixed;
+				bottom: 5rem;
+				height: 2rem;
+				border: 5px solid black;
+				width: 100%;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="whole">
+			<header>
+				<div>我是头部</div>
+				<input type="text" name="" id="edit" value="" placeholder="write" />
+			</header>
+			<div class="content">我是body</div>
+			<footer id="footer-fixed">我是footer</footer>
+		</div>
+	</body>
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var evt = "onorientationchange" in window ? "orientationchange" : "resize";
+		window.addEventListener(evt, resize, false);
+		function resize() {
+			var widths = $(window).width();
+			var heights = $(window).height();
+			$('html').css('font-size', widths / 1080 * 100 + "px")
+			$('body').css('width', widths)
+			$('body').css('height', heights)
+		}
+		resize();
+		function focusBlur(e, fixedObj){
+		      var clickObj=document.getElementById(e);
+		      var obj=document.getElementById(fixedObj);
+		      clickObj.onfocus = function(){
+		          obj.style.cssText = "position:static;bottom:none;";
+		          console.log(111);
+		      };
+		      clickObj.onblur = function(){
+		          obj.style.cssText = "position:fixed;bottom:5rem;";
+		          console.log(222);
+		      };
+		}
+		focusBlur("edit", "footer-fixed");
+		
+	</script>
+
+</html>

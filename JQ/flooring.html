@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0px;
+				margin: 0px;
+				box-sizing: border-box;
+			}
+			.hello{
+				width: 350px;
+				height: 350px;
+				margin: auto;
+			}
+			.hello div{
+				border: 1px solid red;
+				float: left;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="hello">
+			
+		</div>
+	</body>
+</html>
+<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var width = 50;
+	var height= 50;
+	var rowNumber = 7;
+	var colNumber = 7;
+	for(var i=0; l=colNumber,i<l; i++){
+		for(var j=0; len=rowNumber,j<len; j++){
+			var dom = "<div class='dodo'>" + (i + 1) * (j + 1) +"</div>";
+			$(".hello").append(dom);
+		}
+		$(".dodo").width(width);
+		$(".dodo").height(height);
+		$(".dodo").css({lineHeight:height + "px"});
+	}
+</script>

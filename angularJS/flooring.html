@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0px;
+				margin: 0px;
+				box-sizing: border-box;
+			}
+			.hello{
+				width: 350px;
+				height: 350px;
+				margin: auto;
+			}
+			.hello div{
+				border: 1px solid red;
+				float: left;
+				text-align: center;
+				width: 50px;
+				height: 50px;
+			}
+		</style>
+	</head>
+	<body ng-app="app" ng-controller="ctr">
+		<div class="hello">
+			<div class="dodo" ng-repeat="item in arr">{{item.id}}</div>
+		</div>
+	</body>
+</html>
+<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	angular.module("app",[]).controller("ctr",function($scope){
+		$scope.arr = [];
+		for(var i=0;i<49; i++){
+			$scope.arr.push({id:i+1});
+		}
+	})
+</script>

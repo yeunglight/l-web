@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>对象继承数组对象</title>
+	</head>
+	<body>
+	</body>
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var obj = {id:1};
+		var arr = [1,2,3];
+		console.log(arr);
+		for (var i = 0; i < arr.length; i++) {
+			obj["request" + i] = arr[i];
+		}
+		console.log(obj);
+		var testArr = [
+						{exchange: "1", request0: "1"},
+						{exchange: "1", request1: "2"},
+						{exchange: "adventurefeeds", request0: "3036"},
+						{exchange: "adventurefeeds", request1: "2420"},						
+						{exchange: "snw", request2: "504"},
+					  ]
+
+//		var endArr = [
+//						{exchange: "", request0: "1", request1: "2"},
+//						{exchange: "adventurefeeds", request0: "3036", request1:"504"}
+//		]
+
+		var temp = [];
+		for(var i=0; i<testArr.length; i++){
+			if(!temp[testArr[i].exchange]){
+				temp[testArr[i].exchange] = [testArr[i]];
+			}else{
+				temp[testArr[i].exchange].push(testArr[i]);
+			}
+		}
+		var endArr = [];
+		console.log(temp);
+		for(key in temp){
+			var obj = {};
+			for(var i=0; i<temp[key].length; i++){
+				obj = $.extend(obj, temp[key][i]);
+			}
+			endArr.push(obj);
+		}
+		console.log(endArr);
+		
+		
+		
+		$(function a(){
+			for(var i = 0;i < 4;i++){
+				console.log(i);
+				setTimeout(function(){
+					console.log(i);
+				},0);
+			}
+		})
+	</script>
+</html>

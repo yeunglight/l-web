@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body ng-app = "app" ng-controller="ctr">
+	</body>
+</html>
+<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var app = angular.module("app", []);
+	app.controller("ctr", function($scope,$filter){
+		var newDate = "2017.11.14";
+		var x = $filter("date")(new Date(), "yyyy.MM.dd");
+		alert(x);
+	})
+</script>

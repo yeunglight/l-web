@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div ng-app="app" ng-controller="ctr">
+			<input type="checkbox" ng-click="selectFn($event,$index)" ng-repeat="item in itemList" />
+		</div>
+	</body>
+</html>
+<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	 var app = angular.module('app', []);
+	 app.controller("ctr", function($scope){
+		$scope.itemList = [
+			{
+				id:1,
+				name:"11",
+				age:11,
+			},
+			{
+				id:2,
+				name:"12",
+				age:12,
+			},
+			{
+				id:3,
+				name:"13",
+				age:13,
+			}
+		];
+		$scope.checkedArr = [];
+		$scope.selectFn = function (e,index){ // index 为编辑元素的下标
+			var checkedArr = [];
+			var arr = $scope.itemList; // 所有的数据
+			if(e.target.checked){ // 如果 他的标志为true 既选中
+				$scope.checkedArr.push($scope.itemList[index]); // 压倒数组				
+			}else{ // 如果取消选中标志
+				for (var i = $scope.checkedArr.length - 1; i>=0 ; i--) { // 倒叙遍历
+					if($scope.checkedArr[i].id == arr[index].id){ // 在所有的数据中找到 和本次标记元素相等的下标
+						$scope.checkedArr.splice(i,1); // 取消所取消的元素
+					}
+				}
+			}
+			console.log($scope.checkedArr);
+		}
+	})
+</script>

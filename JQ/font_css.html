@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>文字均匀分布</title>
+    <style media="screen">
+      .hello{
+        width: 100px;
+        height: 50px;
+        border: 1px solid red;
+      }
+      .text-balance{
+        text-align-last: justify;
+      }
+      .text-ellipsis{
+        text-overflow:ellipsis;
+        word-break:keep-all;
+        display: inline-block;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hello">
+      均匀分布均匀分布均匀分布均匀分布
+    </div>
+    <div>
+      <button type="button" onclick="textBalance()" name="button">均匀分布</button>
+      <button type="button" onclick="textEllipsis()" name="button">省略</button>
+    </div>
+  </body>
+</html>
+<script src="./js/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+    function textBalance() {
+      $(".hello").addClass('text-balance').removeClass("text-ellipsis");
+    }
+    function textEllipsis() {
+      $(".hello").addClass("text-ellipsis").removeClass("text-balance");
+    }
+</script>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>两个radio选取问题</title>
+	</head>
+	<body>
+			<div id="wrap" ng-app="myApp" ng-controller="ctr">
+				<input type="radio" id="label1" ng-model="IsOn" value="1"/>
+				<label for="label1">第一个radio</label>
+				<input type="radio" id="label2" ng-model="IsOn" value="2" />
+				<label for=s"label2">第二个radio</label>	
+			</div>
+	</body>
+	<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var app = angular.module("myApp", []);
+		app.controller('ctr', function($scope){
+			$scope.IsOn = 2;
+			
+		})
+	</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>全选</title>
+	</head>
+	<body ng-app="myApp" ng-controller = "ctr">
+			<label>全选<input type="checkbox" ng-model="selectAll" ng-click="all(selectAll)"></label><br/>  
+	        <div ng-repeat="person in persons">  
+	            <label>{{person.name}}:<input type="checkbox" ng-change ="dd()" ng-model="person.state"> </label><br/>  
+	        </div>  
+	  
+	        <div>selectAll : {{selectAll}}</div>  
+	        <div ng-repeat="person in persons">  
+	            {{person.name}} : {{person.state}}  
+	        </div>  
+	</body>
+	<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var app = angular.module("myApp", []);
+		app.controller("ctr",function ($scope) {
+			$scope.selectAll=true;  
+		    $scope.all= function (m) {  
+		        for(var i=0;i<$scope.persons.length;i++){  
+		          if(m===true){  
+		              $scope.persons[i].state=true;  
+		          }else {  
+		              $scope.persons[i].state=false;  
+		          }  
+		        }  
+		    };  
+		    $scope.persons=[  
+		        {name:"a",state:true},  
+		        {name:"b",state:true},  
+		        {name:"c",state:true},  
+		        {name:"d",state:true}  
+		    ]  
+		    $scope.dd = function(){
+		    	for (var i = 0; $scope.persons.length>i; i++) {
+		    		if (!$scope.persons[i].state) {
+		    	     	$scope.selectAll = false;	
+		    			return;
+		    		}
+		    	}
+		    	if($scope.persons.length == i){
+		    		$scope.selectAll = true;
+		    	}
+		    }
+		})
+	</script>
+</html>

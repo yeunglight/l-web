@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			li{
+				list-style: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="myApp">
+			<p>{{message}}</p>
+			请输入：<input type="text" name="" id="" v-model="message" />
+			<div v-if = "seen">
+				show time ！！！
+			</div>
+			<div>
+				<button v-on:click = "clickFn">{{showText}}</button>			
+			</div>
+			<div>
+				显示对象:
+				<div v-for="item in itemList">
+					<input type="radio" name="do" v-on:click = "clickRadio(item)"/><span>{{item.do1}}</span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	var app = new Vue({
+	  el: '#myApp',
+	  data: {
+	    message: 'Hello Vue!',
+	    seen:true,
+	    showText: "隐藏",
+	    itemList:[
+	  				{id:1,do1:'学习'},
+	  				{id:2,do1:'学习一个'},
+	  				{id:3,do1:'学习两个'},
+	  			]
+	  },
+	  methods:{
+	  	clickFn:function(){
+	  		if(this.seen){
+	  			this.seen = false;
+	  			this.showText = "显示";
+	  			this.itemList = [];
+	  		}else{
+	  			this.seen = true;
+	  			this.showText = "隐藏";
+	  			this.itemList = [
+	  				{id:1,do1:'学习'},
+	  				{id:2,do1:'学习一个'},
+	  				{id:3,do1:'学习两个'},
+	  			]
+	  		}
+	  	},
+	  	clickRadio:function (item){
+	  		console.log(item.do1);
+		}
+	  	
+	  }
+	})
+	
+</script>

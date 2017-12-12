@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+	</body>
+	<script type="text/javascript">
+		function Mother(){
+			var age, home;
+			this.age =  18;
+			this.home = ["北京", "靖边"];
+		}	
+		Mother.prototype = {
+			sex:"boy"	
+		}
+		function Person (name) {
+			this.name = name;
+			
+		}
+		Person.prototype = new Mother(); // Person的原型为Mother
+		
+		var p1 = new Person("dodo");
+		
+		p1.age = 20;
+		delete p1.age;
+		alert(p1.sex);
+		
+		
+		
+	</script>
+
+</html>

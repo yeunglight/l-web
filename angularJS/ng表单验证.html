@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>带符号的加减计算</title>
+	</head>
+	<body ng-app="myApp" ng-controller = "ctr">
+			<label>必须填：</label>
+			<input type="text" name="" ng-trim="true" required ng-keyup = "click1($event)" id="" />
+			
+	</body>
+	<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var app = angular.module("myApp", []);
+		app.controller("ctr",function ($scope) {
+				$scope.click1 = function (e) {
+					console.log(e.target.value);
+					if(e.target.value.length>0){
+						alert("aa");
+					}
+				}
+		})
+	</script>
+</html>

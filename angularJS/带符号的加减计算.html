@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>带符号的加减计算</title>
+	</head>
+	<body ng-app="myApp" ng-controller = "ctr">
+			第一个数：<input type="text" ng-model="num1"/><br />
+			第二个数：<input type="text" ng-model="num2"/><br />
+			和：<span ng-bind="sum"></span>
+	</body>
+	<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var app = angular.module("myApp", []);
+		app.controller("ctr",function ($scope) {
+			$scope.num1 = 1;
+			$scope.num2 = -2;
+			$scope.sum = $scope.num1 + $scope.num2;
+		})
+	</script>
+</html>

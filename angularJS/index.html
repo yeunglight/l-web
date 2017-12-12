@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body ng-app="app" ng-controller="ctr">
+		<select ng-model="itemName" ng-options="item for item in students">
+	
+		</select>
+		<button ng-click="selectName(itemName)">提交</button>
+	</body>
+	<!--<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var app = angular.module("app", []);
+		app.controller("ctr", function ($scope) {
+			$scope.students = [
+				{name："15",sex："boy"},
+				{name："14",sex："boy"},
+				{name："16",sex："boy"}
+			];
+			$scope.itemName = $scope.students[0].name;
+			$scope.selectName = function (obj) {
+				alert(obj);
+			}
+		})
+	</script>
+</html>

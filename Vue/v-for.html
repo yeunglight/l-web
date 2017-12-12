@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="item in fruits" v-on:click="sayName(item)">{{item.name}}</li>
+			</ul>
+		</div>
+	</body>
+</html>
+<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var vm = new Vue({
+		el:'#app',
+		data:{
+			fruits:[{name:"apple",color:"cyan"},{name:"orange",color:"orange"},{name:"pear",color:"canary"}]
+		},
+		methods:{
+			sayName:function (item){
+				
+			}
+		}
+		
+	});
+	
+</script>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<style type="text/css">
+			
+/* common-print-model start*/
+	.common-print-main{
+		padding: 5px;
+	}
+	.show-page{
+		display: none;
+	}
+	.next-page{
+		page-break-after:always;
+	}
+	.common-print-main .main-body td,
+	.common-print-main .main-body th,
+	.common-print-main .main-body table{
+		border-style: solid;
+		border-color: #0F0F0F;
+	}
+	.common-print-main .main-top span[statement-no]{
+		position: absolute;
+		top: 13px;
+		right: 0px;
+	}
+	.common-print-main .main-top input{
+		border: none;
+		font-size: 24px;
+	  font-family: "宋体";
+	  font-weight: bold;
+		text-align: center;
+		width: 360px;
+	}
+	.common-print-main .main-top .title-line {
+		display: inline-block;
+		height: 4px;
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+		font-size: 24px;
+		max-width: 360px;
+		min-width: 100px;
+		overflow-x: hidden;
+	}
+	.common-print-main .main-top .customer-info {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+	}
+	.common-print-main .main-body table {
+		width: 100%;
+	}
+	.common-print-main .main-body .table-body {
+		height: 144px;
+		overflow-y: auto;
+	}
+	.common-print-main .main-body .table-body table {
+		border-top: none;
+	}
+	.common-print-main .main-body .fixed-table-wrapper .table-body tr:last-child td {
+		border-bottom-color: #0F0F0F;
+	}
+	.common-print-main .main-footer label {
+		width: 145px;
+		line-height: 25px;
+	}
+/* common-print-model end*/
+		</style>
+	</body>
+</html>
+<script type="text/ng-template" id="testDemo">
+	<!-- 如果打印记录中  项目 不超过5条 直接打印 "my-print-container" 这个DOM元素 不需要其他的DOM元素 -->
+	<div class="my-print-container" style="width: 670px;">
+		<div class="common-print-main">
+			<div class="main-top">
+				<!-- 记得修改 下行内容 -->
+				<div>经发物业白桦林居物业服务中心</div>
+				<div class="pos_relative txt-center">
+					<span statement-no>结算单号：YJ170700001</span>
+					<!-- 下方input、span 必须绑定同一个 "客户收款收据" 标题 -->
+					<input type="text" ng-model="param.refundPledgeTitle"/><br>
+					<span class="title-line">{{param.refundPledgeTitle}}</span>
+				</div>
+				<div class="pos_relative txt-center">
+					<!-- 不需要客户名称的直接 删除掉 "customer-info" div -->
+					<div class="customer-info">
+						<span>客户名称：</span>
+						<span>翠鸣园1号楼1-032/宋宝娥</span>
+					</div>
+					<div>
+						<span>收款时间：</span>
+						<span>2017.07.15 13:34</span>
+					</div>
+				</div>
+			</div>
+			<div class="main-body">
+				<!-- *************************************** -->
+				<div class="fixed-table-wrapper">
+				    <!-- <div class="margin-table-head"> -->
+						<!-- 不带合并单元格时，不需要上一行div的样式，直接使用下行即可 -->
+						<div class="table-head">
+				        <table border="1" cellspacing="0" cellpadding="0">
+				            <colgroup>
+												<!--此列为序号列，使用固定公用类设置宽度，无需单独设置，如遇特殊情况，不要加该样式 -->
+				                <col class="num-col"/>
+												<!-- 以下宽度自行调整 -->
+												<col style="width:264px;"/>
+												<col style="width:172px;"/>
+												<col />
+				            </colgroup>
+				            <thead>
+				                <tr>
+				                    <th >序号</th>
+				                    <th >项目名称</th>
+														<th >金额</th>
+				                    <th >备注</th>
+				                </tr>
+				            </thead>
+				        </table>
+				    </div>
+				    <div class="table-body">
+				        <table border="1" cellspacing="0" cellpadding="0">
+				            <colgroup>
+											<col class="num-col"/>
+											<!-- 以下宽度自行调整 -->
+											<col style="width:264px;"/>
+											<col style="width:172px;"/>
+											<col />
+				            </colgroup>
+				            <tbody>
+				                <tr ng-click="getTrData($event, $index)" ng-repeat="testItem in testItemList">
+				                    <td class="txt-center">{{$index + 1}}</td>
+				                    <td ng-bind="testItem.name"></td>
+				                    <td class="txt-right" ng-bind="testItem.money | number:2"></td>
+				                    <td ng-bind="testItem.note"></td>
+				                </tr>
+												<tr ng-click="getTrData($event, $index)" ng-if="testItemList.length < 2">
+														<td class="txt-center">2</td>
+														<td></td>
+														<td></td>
+														<td></td>
+				                </tr>
+												<tr ng-click="getTrData($event, $index)" ng-if="testItemList.length < 3">
+														<td class="txt-center">3</td>
+														<td></td>
+														<td></td>
+														<td></td>
+				                </tr>
+												<tr ng-click="getTrData($event, $index)" ng-if="testItemList.length < 4">
+														<td class="txt-center">4</td>
+														<td></td>
+														<td></td>
+														<td></td>
+				                </tr>
+												<tr ng-click="getTrData($event, $index)" ng-if="testItemList.length < 5">
+														<td class="txt-center">5</td>
+														<td></td>
+														<td></td>
+														<td></td>
+				                </tr>
+				                <tr>
+				                    <td colspan="2" class="txt-center">合计</td>
+				                    <td class="text-right">{{ testItemList | sumOfItemsSingle:{ key: "money", currency: true} }}</td>
+				                    <td></td>
+				                </tr>
+				            </tbody>
+				        </table>
+				    </div>
+				</div>
+				<!-- *************************** -->
+			</div>
+			<div class="main-footer clearfix">
+				<label class="fl">收款人：<span>FULLCARE</span></label>
+				<label class="fl">联系电话：<span>4008-066-166</span></label>
+				<label class="fr">客户签名：<span>王三</span></label>
+			</div>
+		</div>
+	</div>
+	<!-- 如果打印记录中  项目 超过5条  打印下面的 "print-deputy-container" 这个DOM元素 -->
+	<div class="my-attach-print-container show-page" style="width: 670px;">
+		<!-- 注意  如果插入多页 必须 给打印的每一页 加入类名 "next-page" -->
+		<!-- 第一页 -->
+		<div class="common-print-main next-page">
+			<div class="main-top">
+				<!-- 记得修改 下行内容 -->
+				<div>经发物业白桦林居物业服务中心</div>
+				<div class="pos_relative txt-center">
+					<span statement-no>结算单号：YJ170700001</span>
+					<!-- 下方input、span 必须绑定同一个 "客户收款收据" 标题 -->
+					<input type="text" ng-model="param.refundPledgeTitle"/><br>
+					<span class="title-line">{{param.refundPledgeTitle}}</span>
+				</div>
+				<div class="pos_relative txt-center">
+					<!-- 不需要客户名称的直接 删除掉 "customer-info" div -->
+					<div class="customer-info">
+						<span>客户名称：</span>
+						<span>翠鸣园1号楼1-032/宋宝娥</span>
+					</div>
+					<div>
+						<span>收款时间：</span>
+						<span>2017.07.15 13:34</span>
+					</div>
+				</div>
+			</div>
+			<div class="main-body">
+				<!-- *************************************** -->
+				<div class="fixed-table-wrapper">
+				    <!-- <div class="margin-table-head"> -->
+						<!-- 不带合并单元格时，不需要上一行div的样式，直接使用下行即可 -->
+						<div class="table-head">
+				        <table border="1" cellspacing="0" cellpadding="0">
+				            <colgroup>
+												<!--此列为序号列，使用固定公用类设置宽度，无需单独设置，如遇特殊情况，不要加该样式 -->
+				                <col class="num-col"/>
+												<!-- 以下宽度自行调整 -->
+												<col style="width:264px;"/>
+												<col style="width:172px;"/>
+												<col />
+				            </colgroup>
+				            <thead>
+				                <tr>
+				                    <th >序号</th>
+				                    <th >项目名称</th>
+														<th >金额</th>
+				                    <th >备注</th>
+				                </tr>
+				            </thead>
+				        </table>
+				    </div>
+				    <div class="table-body">
+				        <table border="1" cellspacing="0" cellpadding="0">
+				            <colgroup>
+											<col class="num-col"/>
+											<!-- 以下宽度自行调整 -->
+											<col style="width:264px;"/>
+											<col style="width:172px;"/>
+											<col />
+				            </colgroup>
+				            <tbody>
+				                <tr ng-click="getTrData($event, $index)" ng-repeat="testItem in testItemList | limitTo: 5">
+				                    <td class="txt-center">{{$index + 1}}</td>
+				                    <td ng-bind="testItem.name"></td>
+				                    <td class="txt-right" ng-bind="testItem.money | number:2"></td>
+				                    <td ng-bind="testItem.note"></td>
+				                </tr>
+												<tr ng-click="getTrData($event, $index)" ng-if="testItemList.length < 2">
+														<td class="txt-center">2</td>
+														<td></td>
+														<td></td>
+														<td></td>
+				                </tr>
+												<tr ng-click="getTrData($event, $index)" ng-if="testItemList.length < 3">
+														<td class="txt-center">3</td>
+														<td></td>
+														<td></td>
+														<td></td>
+				                </tr>
+												<tr ng-click="getTrData($event, $index)" ng-if="testItemList.length < 4">
+														<td class="txt-center">4</td>
+														<td></td>
+														<td></td>
+														<td></td>
+				                </tr>
+												<tr ng-click="getTrData($event, $index)" ng-if="testItemList.length < 5">
+														<td class="txt-center">5</td>
+														<td></td>
+														<td></td>
+														<td></td>
+				                </tr>
+				                <tr>
+				                    <td colspan="2" class="txt-center">合计</td>
+				                    <td class="text-right">{{ testItemList.slice(0,5) | sumOfItemsSingle:{ key: "money", currency: true} }}</td>
+				                    <td></td>
+				                </tr>
+				            </tbody>
+				        </table>
+				    </div>
+				</div>
+				<!-- *************************** -->
+			</div>
+			<div class="main-footer clearfix">
+				<label class="fl">收款人：<span>FULLCARE</span></label>
+				<label class="fl">联系电话：<span>4008-066-166</span></label>
+				<label class="fr">客户签名：<span>王三</span></label>
+			</div>
+		</div>
+		<!-- 第二、第三....页 -->
+		<div class="common-print-main next-page" ng-repeat = "nextPageItemList in newTestItemList">
+			<div class="main-top">
+				<!-- 记得修改 下行内容 -->
+				<div>经发物业白桦林居物业服务中心</div>
+				<div class="pos_relative txt-center">
+					<span statement-no>结算单号：YJ170700001</span>
+					<!-- 下方input、span 必须绑定同一个 "客户收款收据" 标题 -->
+					<input type="text" ng-model="param.refundPledgeTitle"/><br>
+					<span class="title-line">{{param.refundPledgeTitle}}</span>
+				</div>
+				<div class="pos_relative txt-center">
+					<!-- 不需要客户名称的直接 删除掉 "customer-info" div -->
+					<div class="customer-info">
+						<span>客户名称：</span>
+						<span>翠鸣园1号楼1-032/宋宝娥</span>
+					</div>
+					<div>
+						<span>收款时间：</span>
+						<span>2017.07.15 13:34</span>
+					</div>
+				</div>
+			</div>
+			<div class="main-body">
+				<!-- *************************************** -->
+				<div class="fixed-table-wrapper">
+				    <!-- <div class="margin-table-head"> -->
+						<!-- 不带合并单元格时，不需要上一行div的样式，直接使用下行即可 -->
+						<div class="table-head">
+				        <table border="1" cellspacing="0" cellpadding="0">
+				            <colgroup>
+												<!--此列为序号列，使用固定公用类设置宽度，无需单独设置，如遇特殊情况，不要加该样式 -->
+				                <col class="num-col"/>
+												<!-- 以下宽度自行调整 -->
+												<col style="width:264px;"/>
+												<col style="width:172px;"/>
+												<col />
+				            </colgroup>
+				            <thead>
+				                <tr>
+				                    <th >序号</th>
+				                    <th >项目名称</th>
+														<th >金额</th>
+				                    <th >备注</th>
+				                </tr>
+				            </thead>
+				        </table>
+				    </div>
+				    <div class="table-body">
+				        <table border="1" cellspacing="0" cellpadding="0">
+				            <colgroup>
+											<col class="num-col"/>
+											<!-- 以下宽度自行调整 -->
+											<col style="width:264px;"/>
+											<col style="width:172px;"/>
+											<col />
+				            </colgroup>
+				            <tbody>
+				                <tr ng-click="getTrData($event, $index)" ng-repeat="nextPageItem in nextPageItemList">
+				                    <td class="txt-center">{{$index + 1}}</td>
+				                    <td ng-bind="nextPageItem.name"></td>
+				                    <td class="txt-right" ng-bind="nextPageItem.money | number:2"></td>
+				                    <td ng-bind="nextPageItem.note"></td>
+				                </tr>
+												<tr ng-click="getTrData($event, $index)" ng-if="nextPageItemList.length < 2">
+														<td class="txt-center">2</td>
+														<td></td>
+														<td></td>
+														<td></td>
+				                </tr>
+												<tr ng-click="getTrData($event, $index)" ng-if="nextPageItemList.length < 3">
+														<td class="txt-center">3</td>
+														<td></td>
+														<td></td>
+														<td></td>
+				                </tr>
+												<tr ng-click="getTrData($event, $index)" ng-if="nextPageItemList.length < 4">
+														<td class="txt-center">4</td>
+														<td></td>
+														<td></td>
+														<td></td>
+				                </tr>
+												<tr ng-click="getTrData($event, $index)" ng-if="nextPageItemList.length < 5">
+														<td class="txt-center">5</td>
+														<td></td>
+														<td></td>
+														<td></td>
+				                </tr>
+				                <tr>
+				                    <td colspan="2" class="txt-center">合计</td>
+				                    <td class="text-right">{{ nextPageItemList | sumOfItemsSingle:{ key: "money", currency: true} }}</td>
+				                    <td></td>
+				                </tr>
+				            </tbody>
+				        </table>
+				    </div>
+				</div>
+				<!-- *************************** -->
+			</div>
+			<div class="main-footer clearfix">
+				<label class="fl">收款人：<span>FULLCARE</span></label>
+				<label class="fl">联系电话：<span>4008-066-166</span></label>
+				<label class="fr">客户签名：<span>王三</span></label>
+			</div>
+		</div>
+	</div>
+	<div class="wi-alert-toolbar pos_relative">
+		<span class="deep-red-txt pos_absolute" style="left: 5px; bottom: 8px;">操作提示:可修改操作名称</span>
+		<!-- 明确 打印记录 不超过5条的  直接传参  "1"   否则  传参 "2"-->
+		<input type="button" class="mag-small-btn blue-style-btn" value="打&nbsp;&nbsp;印" ng-click="testPrintDemoFn(2)">
+		<input type="button" class="mag-small-btn blue-style-btn" value="关&nbsp;&nbsp;闭" ng-click="closeDialog($event)">
+	</div>
+</script>
+
+<script type="text/javascript">
+	//预交结算  收费  打印收款收据
+	$scope.testItemList = [
+			{
+				name:'物业取暖',
+				money:200.00,
+				note:'物业取暖备注1'
+			},{
+				name:'物业取暖',
+				money:300.00,
+				note:'物业取暖备注2'
+			},{
+				name:'物业取暖',
+				money:200.00,
+				note:'物业取暖备注3'
+			},{
+				name:'物业取暖',
+				money:300.00,
+				note:'物业取暖备注4'
+			},{
+				name:'物业取暖',
+				money:200.00,
+				note:'物业取暖备注5'
+			},{
+				name:'物业取暖',
+				money:300.00,
+				note:'物业取暖备注6'
+			},{
+				name:'物业取暖',
+				money:200.00,
+				note:'物业取暖备注7'
+			},{
+				name:'物业取暖',
+				money:300.00,
+				note:'物业取暖备注8'
+			},{
+				name:'物业取暖',
+				money:300.00,
+				note:'物业取暖备注9'
+			},{
+				name:'物业取暖',
+				money:200.00,
+				note:'物业取暖备注10'
+			},{
+				name:'物业取暖',
+				money:300.00,
+				note:'物业取暖备注11'
+			},{
+				name:'物业取暖',
+				money:200.00,
+				note:'物业取暖备注12'
+			},{
+				name:'物业取暖',
+				money:300.00,
+				note:'物业取暖备注13'
+			}
+	]
+	// 将数组 拆分组装
+	$scope.dataArrSplit = function (data) {
+		var arr = [];
+		var res = [];
+		for (var i = 0; i < data.length / 5; i++) {
+			arr = [];
+			for (var j = i*5; j < 5*(i+1); j++) {
+				if (j >= data.length) {
+					break;
+				}
+				arr.push(data[j]);
+			}
+			res.push(arr);
+			console.log(arr);
+		}
+		return res;
+	}
+	$scope.testPrintDemoFn = function (singleSign) {
+		var e;
+		if (singleSign == 1) { // 如果 该条记录 的项目确定 且不超过五条
+			e = $(".my-print-container"); //你的 容器的类名
+		}else if(singleSign == 2) { // 如果 该条记录的项目可能超过五条
+			$scope.newTestItemList = $scope.dataArrSplit($scope.testItemList); //
+			$scope.newTestItemList.splice(0,1);
+			e = $(".my-attach-print-container"); // 你的 容器的类名
+		}
+		$timeout(function () {
+			e.toggleClass("show-page"); // 显示该DOM对象
+			e.print({
+				globalStyles:true,//是否包含父文档的样式，默认为true
+				mediaPrint:false,//是否包含media='print'的链接标签。会被globalStyles选项覆盖，默认为false
+				stylesheet:null,//外部样式表的URL地址，默认为null
+				noPrintSelector:".no-print",//不想打印的元素的jQuery选择器，默认为".no-print"
+				iframe:true,//是否使用一个iframe来替代打印表单的弹出窗口，true为在本页面进行打印，false就是说新开一个页面打印，默认为true
+				append:null,//将内容添加到打印内容的后面
+				prepend:null,//将内容添加到打印内容的前面，可以用来作为要打印内容
+				//deferred: $.Deferred()//回调函数
+			});
+			e.toggleClass("show-page");// 隐藏掉 该DOM对象
+		}, 10);
+
+	}
+</script>
