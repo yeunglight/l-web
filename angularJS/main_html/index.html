@@ -3,16 +3,40 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>首页</title>
+		<!--bootStrap-->
 		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/bootstrap-dialog.min.css"/>
 	</head>
-	<body ng-app="mainApp" controler="mainCtr">
-		
+	<body ng-app="mainApp" controller="mainCtr">
+		<header>
+			<nav>菜单</nav>
+		</header>
+		<ul >
+			<li>
+				<a href="#/" >首页</a>
+			</li>
+			<li>
+				<a href="#/first">第1页</a>
+			</li>
+		</ul>
+		<div style="width:500px;height: 500px;" ng-view></div>
 	</body>
 </html>
-<script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../JQ/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
+<!--JQ-->
+<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<!--bootStrap-->
+<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<!--bootStrap dialog-->
 <script src="../js/bootstrap-dialog.min.js" type="text/javascript" charset="utf-8"></script>
-
+<!--angular-->
+<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+<!--angular router-->
+<script src="../js/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
+<!--lazyload-->
+<script src="../libs/oclazyload/ocLazyLoad.js" type="text/javascript" charset="utf-8"></script>
+<!--自定义组件-->
+<script src="../libs/yeung_ui/l.ui.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/config.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/config_router.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
