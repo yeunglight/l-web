@@ -1,9 +1,4 @@
 'use strict';
-//myApp.controller("mainCtr",function($http,$scope,$rootScope,rmbFilter,chineseFilter,$route){
-//	
-//	
-//})
-myApp.controller("mainCtr",function($http,$scope){
-	
-	
+angular.module('mainApp').controller("mainCtr",function($http,$scope,$rootScope,$filter){
+	$scope.xxx = "200";
 })

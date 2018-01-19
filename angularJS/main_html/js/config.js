@@ -22,7 +22,7 @@
 //        
 //      }]);
 //// config
-var app =  
+var app =
 myApp.config(
     ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$httpProvider',
     function ($controllerProvider,   $compileProvider,   $filterProvider,   $provide,  $httpProvider) {

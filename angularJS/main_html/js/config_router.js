@@ -1,28 +1,49 @@
 'use strict';
-var app = angular.module('mainApp',['ngRoute'])
-//		 .config(["$routeProvider","$controllerProvider",function($routeProvider,$controllerProvider){
-//			$routeProvider
-//			.when('/', {
-//				templateUrl: '/',
-//			})
-//			.when('/first',{
-//				templateUrl: './first.html',
-//			})
-//			.otherwise({redirectTo:'/'});
-//		}])
-.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-//  var tplPrefix = "tpl/";//模板前缀
-    var tplSuffix = ".html";//模板后缀
-    var ctrlJsPrefix = "js/controller/";//controllerJs前缀
-    $urlRouterProvider.otherwise('/');
-    /*menudId在main.js中用到*/
-    $stateProvider.state('/', {
-        url: '/',
-        templateUrl: 'first' + tplSuffix,
-        resolve: {
-            deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load([ctrlJsPrefix + "filterCtr.js"]);
-            }]
-        }
-    })
-}])
+var app = angular.module('mainApp', ['ui.router','oc.lazyLoad']);
+app.config(['$stateProvider', '$urlRouterProvider',function($stateProvider, $urlRouterProvider){
+	$urlRouterProvider.otherwise('/');
+    //路由配置
+    $stateProvider
+        .state('/', {
+            url:'/',
+            templateUrl:'/',
+        })
+        .state('/first', {
+            url:'/first',
+            templateUrl:'./html/first.html',
+			controller: "mallCtr",
+          	resolve: {
+	            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+	                return $ocLazyLoad.load({
+	                	name: 'mainApp',
+	                	files:['js/controller/first.js']
+		            });
+	            }]
+	        }
+        })
+}]);
+//依赖注入oc.lazyLoad
+//var app = angular.module('mainApp',['ui.router','oc.lazyLoad']);
+////配置config
+//app.config(function ($stateProvider, $locationProvider,$urlRouterProvider) {
+//  $urlRouterProvider.otherwise('/');
+//  $stateProvider
+//      //懒加载控制器的三种写法（为一个模块的前提下）
+//      .state('/',{
+//          url : '/',
+//          templateUrl:'/',
+//      })
+//      .state('/first',{
+//          url : '/first',
+//          templateUrl:'./html/first.html',
+//          controller: "mallCtr",
+//          resolve : {
+//              loadMyCtrl : function ($ocLazyLoad) {
+//                  return $ocLazyLoad.load({
+//                      name: 'mainApp',
+//                      files: ['js/controller/first.js']
+//                  })
+//              }
+//          }
+//      })
+//});

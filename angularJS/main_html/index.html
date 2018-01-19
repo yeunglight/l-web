@@ -6,20 +6,32 @@
 		<!--bootStrap-->
 		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/bootstrap-dialog.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap-select.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<style type="text/css">
+			.route-main{
+				width:500px;
+				height: 500px;
+				border: 1px solid red;
+			}
+		</style>
 	</head>
-	<body ng-app="mainApp" controller="mainCtr">
+	<body ng-app="mainApp" ng-controller="mainCtr">
 		<header>
 			<nav>菜单</nav>
 		</header>
 		<ul >
 			<li>
-				<a href="#/" >首页</a>
+				<a ui-sref="/" >首页</a>
 			</li>
 			<li>
-				<a href="#/first">第1页</a>
+				<a ui-sref="/first">第1页</a>
 			</li>
 		</ul>
-		<div style="width:500px;height: 500px;" ng-view></div>
+		<div ng-bind="xxx">
+			
+		</div>
+		<div class="route-main" ui-view=""></div>
 	</body>
 </html>
 <!--JQ-->
@@ -28,15 +40,18 @@
 <script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 <!--bootStrap dialog-->
 <script src="../js/bootstrap-dialog.min.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="../js/bootstrap-select.min.js" type="text/javascript" charset="utf-8"></script>-->
 <!--angular-->
 <script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
 <!--angular router-->
-<script src="../js/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="../js/angular-route.min.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="../js/angular-ui-router.js" type="text/javascript" charset="utf-8"></script>
 <!--lazyload-->
 <script src="../libs/oclazyload/ocLazyLoad.js" type="text/javascript" charset="utf-8"></script>
 <!--自定义组件-->
 <script src="../libs/yeung_ui/l.ui.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/app.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/config.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="js/config.lazyload.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="js/config.js" type="text/javascript" charset="utf-8"></script>-->
 <script src="js/config_router.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
